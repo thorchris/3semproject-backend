@@ -14,7 +14,6 @@ public class StarWarsDTO {
     private String height; 
     private String mass; 
     private String eye_color; 
-
  
    
     public StarWarsDTO(String name, int uid, String url) {
@@ -48,8 +47,29 @@ public class StarWarsDTO {
         this.name = name;
     }
 
-  
-    
+    public String getHeight() {
+        return height;
+    }
+
+    public void setHeight(String height) {
+        this.height = height;
+    }
+
+    public String getMass() {
+        return mass;
+    }
+
+    public void setMass(String mass) {
+        this.mass = mass;
+    }
+
+    public String getEye_color() {
+        return eye_color;
+    }
+
+    public void setEye_color(String eye_color) {
+        this.eye_color = eye_color;
+    }    
     
     
     

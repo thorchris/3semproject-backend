@@ -9,6 +9,14 @@ import DTO.StarWarsDTO;
 import DTO.StarWarsListDTO;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.nimbusds.jose.shaded.json.JSONArray;
+import com.nimbusds.jose.shaded.json.JSONObject;
+import com.nimbusds.jose.shaded.json.parser.JSONParser;
+import com.nimbusds.jose.shaded.json.parser.ParseException;
 import java.io.IOException;
 
 /**
@@ -26,21 +34,28 @@ public class StarWarsFetcher {
         StarWarsListDTO lcs = (StarWarsListDTO) gson.fromJson(sw, StarWarsListDTO.class);
         return gson.toJson(lcs);
     }
-    
-    public static String fetchPersonFromStarWarsApi(int id) throws IOException{
-        String sw_person_url = "https://www.swapi.tech/api/people/" + id; 
-        
+
+
+    public static String fetchPersonFromStarWarsApi(int id) throws IOException, ParseException {
+        String sw_person_url = "https://www.swapi.tech/api/people/" + id;
+
         String person_data = HttpUtils.fetchData(sw_person_url);
-        System.out.println(person_data);
-        StarWarsDTO swDTO = gson.fromJson(person_data, StarWarsDTO.class);
         
-        return gson.toJson(swDTO); 
+        JsonElement jelement = new JsonParser().parse(person_data);
+        JsonObject jobject = jelement.getAsJsonObject();
+        jobject = jobject.getAsJsonObject("result");
+        
+        JsonObject starWarsProperties = jobject.getAsJsonObject("properties");
+        StarWarsDTO swDTO = gson.fromJson(starWarsProperties, StarWarsDTO.class);
+        swDTO.setUid(id);
+        
+        String result = gson.toJson(swDTO);
+        return result;
     }
     
-    public static void main(String[] args) throws IOException {
-        String result = StarWarsFetcher.fetchPersonFromStarWarsApi(1); 
+    public static void main(String[] args) throws IOException, ParseException {
+        String result = StarWarsFetcher.fetchPersonFromStarWarsApi(1);
         System.out.println(result);
     }
-    
 
 }

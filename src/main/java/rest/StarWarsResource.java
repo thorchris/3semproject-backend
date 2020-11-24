@@ -8,10 +8,12 @@ package rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.nimbusds.jose.shaded.json.parser.ParseException;
 import java.io.IOException;
 import javax.persistence.EntityManagerFactory;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -44,7 +46,14 @@ public class StarWarsResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("all")
-    public String allUsers() throws IOException, InterruptedException {
+    public String allStarWars() throws IOException, InterruptedException {
         return StarWarsFetcher.fetchDataFromStarWarsApi(); 
+    }
+    
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("character/{id}")
+    public String getPerson(@PathParam("id") int id) throws IOException, InterruptedException, ParseException {
+        return StarWarsFetcher.fetchPersonFromStarWarsApi(id); 
     }
 }
