@@ -11,6 +11,9 @@ public class StarWarsDTO {
     private String name; 
     private int uid; 
     private String url; 
+    private String height; 
+    private String mass; 
+    private String eye_color; 
 
  
    
