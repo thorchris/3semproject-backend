@@ -19,12 +19,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Disabled;
 import rest.ApplicationConfig;
 
 /**
  *
  * @author Frederik Dahl <cph-fd76@cphbusiness.dk>
  */
+@Disabled
 public class StarWarsFetcherTest {
     
     private static final int SERVER_PORT = 7777;
@@ -65,7 +67,6 @@ public class StarWarsFetcherTest {
         String expResult = "";
         String result = StarWarsFetcher.fetchDataFromStarWarsApi();
         assertNotEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
      
     }
     
