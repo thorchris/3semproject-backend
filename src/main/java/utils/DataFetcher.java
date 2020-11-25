@@ -1,7 +1,5 @@
 package utils;
 
-import DTO.BreakingBadDTO;
-import DTO.GotDTO;
 import DTO.StarWarsDTO;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -15,20 +13,11 @@ import java.util.concurrent.TimeoutException;
 
 public class DataFetcher {
 
-    private static String gotApi = "https://thronesapi.com/api/v2/Characters";
     private static String swApi = "https://www.swapi.tech/api/people/";
-    private static String bbApi = "https://www.breakingbadapi.com/api/characters";
 
 
 
     
-    public static String fetchDataFromGotApi() throws IOException {
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        String got = HttpUtils.fetchData(gotApi);
-        GotDTO gotDTO = gson.fromJson(got, GotDTO.class);
-        String gotStr = gson.toJson(gotDTO);
-        return gotStr;
-    }
 
     public static String fetchDataFromSwApi() throws IOException {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -37,12 +26,6 @@ public class DataFetcher {
         return gson.toJson(starwarsDTO);
     }
     
-    public static String fetchDataFromBBApi() throws IOException {
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        String bb = HttpUtils.fetchData(bbApi);
-        BreakingBadDTO bbDTO = gson.fromJson(bb, BreakingBadDTO.class);
-        return gson.toJson(bbDTO);
-    }
 
 //    
 //    public static String fetchDataFromApi(ExecutorService executorService) throws InterruptedException, ExecutionException, TimeoutException, IOException {
