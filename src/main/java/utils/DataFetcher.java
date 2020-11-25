@@ -15,7 +15,7 @@ import java.util.concurrent.TimeoutException;
 
 public class DataFetcher {
 
-    private static String gotApi = "https://www.anapioficeandfire.com/api/characters";
+    private static String gotApi = "https://thronesapi.com/api/v2/Characters";
     private static String swApi = "https://www.swapi.tech/api/people/";
     private static String bbApi = "https://www.breakingbadapi.com/api/characters";
 
@@ -26,7 +26,8 @@ public class DataFetcher {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String got = HttpUtils.fetchData(gotApi);
         GotDTO gotDTO = gson.fromJson(got, GotDTO.class);
-        return gson.toJson(gotDTO);
+        String gotStr = gson.toJson(gotDTO);
+        return gotStr;
     }
 
     public static String fetchDataFromSwApi() throws IOException {

@@ -1,11 +1,16 @@
 package rest;
 
+import DTO.GotDTO;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import entities.User;
 import facades.UserFacade;
 import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeoutException;
 import javax.annotation.security.RolesAllowed;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -21,12 +26,14 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.SecurityContext;
 import utils.DataFetcher;
 import utils.EMF_Creator;
+import utils.GotFetcher;
 
 
 @Path("got")
 public class GotResource {
     private static Gson gson = new GsonBuilder().setPrettyPrinting().create(); 
    
+    private ExecutorService es = Executors.newCachedThreadPool();
     
     
     private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory();
@@ -46,8 +53,8 @@ public class GotResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("all")
-    public String allUsers() throws IOException {
-        return DataFetcher.fetchDataFromGotApi();
+    public String allUsers() throws IOException, InterruptedException{
+        return GotFetcher.fetchDataFromGotApi();
     }
   
     
