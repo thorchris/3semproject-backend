@@ -1,6 +1,6 @@
 package utils;
 
-import DTO.HarryPotterDTOs;
+import DTO.HarryPotterListDTO;
 import DTO.HarryPotterDTO;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -15,7 +15,7 @@ import utils.HttpUtils;
 
 public class HarryPotterFethcer {
     
-      public static String bbFetch(ExecutorService threadPool, final Gson gson, String FACT_SERVER) throws Exception{
+      public static String hpFetch(ExecutorService threadPool, final Gson gson, String FACT_SERVER) throws Exception{
         
         Callable<List<HarryPotterDTO>> charTask = new Callable<List<HarryPotterDTO>>(){
             @Override
@@ -34,7 +34,7 @@ public class HarryPotterFethcer {
         
         List<HarryPotterDTO> charDTOList = futureChar.get(2, TimeUnit.SECONDS);
          
-        HarryPotterDTOs sDTO = new HarryPotterDTOs(charDTOList);
+        HarryPotterListDTO sDTO = new HarryPotterListDTO(charDTOList);
         
         String standartJSON = gson.toJson(sDTO);
           

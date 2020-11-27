@@ -33,7 +33,7 @@ public class HpRessource {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("all")
     public String allChars() throws IOException, Exception {
-        String result = HarryPotterFethcer.bbFetch(es, GSON, "http://hp-api.herokuapp.com/api/characters");
+        String result = HarryPotterFethcer.hpFetch(es, GSON, "http://hp-api.herokuapp.com/api/characters");
         cachedResponse = result;
         return result;
     }  
