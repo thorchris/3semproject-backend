@@ -75,7 +75,7 @@ public class VoteFacadeTest {
     }
     
     @Test
-    public void testGetVoteFromDBwhereScoreIs0() {
+    public void testGetVoteFromDBwhereUserIsNotInDB() {
         String characterName = "Not in db";
         VoteDTO vote2 = facade.getVoteFromDB(characterName);
         
