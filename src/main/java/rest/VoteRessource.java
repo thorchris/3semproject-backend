@@ -47,9 +47,9 @@ public class VoteRessource {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/{characterName}")
     public String getVote(@PathParam("characterName") String characterName) throws IOException, InterruptedException, ParseException {
-        Vote vote = facade.getVoteFromDB(characterName);
-        VoteDTO voteDTO = new VoteDTO(vote); 
-        return gson.toJson(voteDTO); 
+        VoteDTO vote = facade.getVoteFromDB(characterName);
+       
+        return gson.toJson(vote); 
     }
     
     

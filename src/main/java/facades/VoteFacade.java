@@ -5,6 +5,7 @@
  */
 package facades;
 
+import DTO.VoteDTO;
 import entities.Vote;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -41,7 +42,7 @@ public class VoteFacade {
             em.getTransaction().begin();
             if (isAlreadyInDatabase(characterName)) {
 
-                vote = em.find(Vote.class, characterName); 
+                vote = em.find(Vote.class, characterName);
                 int voteScore = vote.getVoteScore();
                 vote.setVoteScore(voteScore + 1);
                 em.persist(vote);
@@ -58,31 +59,39 @@ public class VoteFacade {
     }
 
     public Boolean isAlreadyInDatabase(String characterName) {
-        Vote vote = getVoteFromDB(characterName);
+        VoteDTO vote = getVoteFromDB(characterName);
 
-        return vote != null;
+        if (vote.getCharacterName().equals("No result")) {
+            return false;
+        } else {
+            return true;
+        }
+
     }
 
-    public Vote getVoteFromDB(String characterName) {
+    public VoteDTO getVoteFromDB(String characterName) {
         EntityManager em = emf.createEntityManager();
         Vote vote;
 
         try {
             em.getTransaction().begin();
-            vote = em.find(Vote.class, characterName); 
-            
-           
-            em.getTransaction().commit();
-        } catch (NoResultException e){
-            return null; 
-        
+            vote = em.find(Vote.class, characterName);
+            if (vote != null) {
+
+                em.getTransaction().commit();
+            } else {
+                vote = new Vote("No result");
+                vote.setVoteScore(0);
+            }
+        } catch (NoResultException e) {
+            return null;
+
         } finally {
             em.close();
         }
 
-        return vote;
+        return new VoteDTO(vote);
     }
-    
 
     //TODO DELETE ME
     public static void main(String[] args) {
@@ -90,19 +99,23 @@ public class VoteFacade {
         VoteFacade facade = VoteFacade.getVoteFacade(emf);
         EntityManager em = emf.createEntityManager();
 
-        String characterName = "Harry Potter";
+        String characterName = "harry potter";
+
         Boolean shouldBeFalse = facade.isAlreadyInDatabase(characterName);
-        System.out.println("First time searching for hp in db: " + shouldBeFalse);
-        
+        System.out.println("First time searching for hp in db: "
+                + shouldBeFalse);
+
         facade.addVote(characterName);
-        Vote vote = facade.getVoteFromDB(characterName);
-        System.out.println("Vote from DB: " + vote.getCharacterName());
+        VoteDTO vote = facade.getVoteFromDB(characterName);
+        System.out.println("Vote from DB: " + vote.getCharacterName()); 
         System.out.println("First score: " + vote.getVoteScore());
         
         Boolean shouldBeTrue = facade.isAlreadyInDatabase(characterName);
-        System.out.println("Second time searching for hp in db: " + shouldBeTrue);
-        
+        System.out.println("Second time searching for hp in db: "
+                + shouldBeTrue);
+
         facade.addVote(characterName);
+
         vote = facade.getVoteFromDB(characterName);
         System.out.println("Second score: " + vote.getVoteScore());
     }

@@ -5,6 +5,7 @@
  */
 package facades;
 
+import DTO.VoteDTO;
 import entities.Vote;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -51,7 +52,7 @@ public class VoteFacadeTest {
     public void testGetVoteFromDBwhereScoreEqualsOne() {
         String characterName = "Obi Wan Kenobi";
         
-        Vote vote2 = facade.getVoteFromDB(characterName);
+        VoteDTO vote2 = facade.getVoteFromDB(characterName);
         
         int expectedVoteScore = 1; 
         int resultVoteScore = vote2.getVoteScore(); 
@@ -64,9 +65,21 @@ public class VoteFacadeTest {
     public void testGetVoteFromDBwhereScoreEqualsTwo() {
         String characterName = "Obi Wan Kenobi";
         facade.addVote(characterName);
-        Vote vote2 = facade.getVoteFromDB(characterName);
+        VoteDTO vote2 = facade.getVoteFromDB(characterName);
         
         int expectedVoteScore = 2; 
+        int resultVoteScore = vote2.getVoteScore(); 
+        
+        assertEquals(expectedVoteScore, resultVoteScore); 
+        
+    }
+    
+    @Test
+    public void testGetVoteFromDBwhereScoreIs0() {
+        String characterName = "Not in db";
+        VoteDTO vote2 = facade.getVoteFromDB(characterName);
+        
+        int expectedVoteScore = 0; 
         int resultVoteScore = vote2.getVoteScore(); 
         
         assertEquals(expectedVoteScore, resultVoteScore); 
@@ -79,7 +92,7 @@ public class VoteFacadeTest {
         String newCharactername = "Anakin Skywalker"; 
         
         facade.addVote(newCharactername);
-        Vote vote2 = facade.getVoteFromDB(newCharactername);
+        VoteDTO vote2 = facade.getVoteFromDB(newCharactername);
         
         int expectedVoteScore = 1; 
         int resultVoteScore = vote2.getVoteScore(); 
@@ -94,7 +107,7 @@ public class VoteFacadeTest {
          String characterName = "Obi Wan Kenobi"; 
         
         facade.addVote(characterName);
-        Vote vote2 = facade.getVoteFromDB(characterName);
+        VoteDTO vote2 = facade.getVoteFromDB(characterName);
         
         int expectedVoteScore = 2; 
         int resultVoteScore = vote2.getVoteScore(); 
