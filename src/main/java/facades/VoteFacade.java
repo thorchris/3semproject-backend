@@ -6,6 +6,7 @@
 package facades;
 
 import entities.Vote;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.NoResultException;
@@ -81,6 +82,7 @@ public class VoteFacade {
 
         return vote;
     }
+    
 
     //TODO DELETE ME
     public static void main(String[] args) {

@@ -27,6 +27,7 @@ public class ApplicationConfig extends Application {
         resources.add(rest.HpRessource.class);
         resources.add(rest.StarWarsResource.class); 
         resources.add(rest.UserResource.class);
+        resources.add(rest.VoteRessource.class);
         resources.add(security.JWTAuthenticationFilter.class);
         resources.add(security.LoginEndpoint.class);
         resources.add(security.RolesAllowedFilter.class);
