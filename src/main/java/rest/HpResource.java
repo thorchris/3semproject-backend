@@ -13,10 +13,9 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriInfo;
 import fetchers.HarryPotterFetcher;
 
-
 @Path("hp")
-public class HpRessource {
-    
+public class HpResource {
+
     @Context
     private UriInfo context;
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
@@ -36,5 +35,5 @@ public class HpRessource {
         String result = HarryPotterFetcher.hpFetch(es, GSON, "http://hp-api.herokuapp.com/api/characters");
         cachedResponse = result;
         return result;
-    }  
+    }
 }

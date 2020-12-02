@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package rest;
 
 import com.google.gson.Gson;
@@ -23,12 +22,13 @@ import utils.EMF_Creator;
 import fetchers.StarWarsFetcher;
 
 /**
- * 
+ *
  * @author Frederik Dahl <cph-fd76@cphbusiness.dk>
  */
-  @Path("starwars")
+@Path("starwars")
 public class StarWarsResource {
-    private static Gson gson = new GsonBuilder().setPrettyPrinting().create(); 
+
+    private static Gson gson = new GsonBuilder().setPrettyPrinting().create();
     private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory();
     @Context
     private UriInfo context;
@@ -46,13 +46,13 @@ public class StarWarsResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("all")
     public String allStarWars() throws IOException, InterruptedException {
-        return StarWarsFetcher.fetchDataFromStarWarsApi(); 
+        return StarWarsFetcher.fetchDataFromStarWarsApi();
     }
-    
+
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("character/{id}")
     public String getPerson(@PathParam("id") int id) throws IOException, InterruptedException, ParseException {
-        return StarWarsFetcher.fetchPersonFromStarWarsApi(id); 
+        return StarWarsFetcher.fetchPersonFromStarWarsApi(id);
     }
 }

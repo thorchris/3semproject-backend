@@ -20,11 +20,11 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.SecurityContext;
 import utils.EMF_Creator;
 
-
 @Path("info")
 public class UserResource {
-    private static Gson gson = new GsonBuilder().setPrettyPrinting().create(); 
-    
+
+    private static Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
     private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory();
     @Context
     private UriInfo context;
@@ -45,7 +45,7 @@ public class UserResource {
     public String allUsers() {
         EntityManager em = EMF.createEntityManager();
         try {
-            TypedQuery<User> query = em.createQuery ("select u from User u",entities.User.class);
+            TypedQuery<User> query = em.createQuery("select u from User u", entities.User.class);
             List<User> users = query.getResultList();
             return "[" + users.size() + "]";
         } finally {
@@ -70,17 +70,16 @@ public class UserResource {
         String thisuser = securityContext.getUserPrincipal().getName();
         return "{\"msg\": \"Hello to (admin) User: " + thisuser + "\"}";
     }
-    
+
     @POST
     @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON})
     public String addPerson(String user) {
-        
+
         User u = gson.fromJson(user, User.class);
         UserFacade.getUserFacade(EMF).addUser(u.getUserName(), u.getUserPass());
-        
+
         return "User added";
     }
-  
-    
+
 }

@@ -8,13 +8,11 @@ import DTO.HarryPotterListDTO;
 import DTO.StarWarsDTO;
 import DTO.StarWarsListDTO;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import utils.HttpUtils;
@@ -82,15 +80,6 @@ public class SearchFetcher {
         String standartJSON = gson.toJson(combinedList);
 
         return standartJSON;
-    }
-
-    public static void main(String[] args) throws Exception {
-        Gson GSON = new GsonBuilder().setPrettyPrinting().create();
-        ExecutorService es = Executors.newCachedThreadPool();
-
-        String test = searchFetcherApi(es, GSON);
-        System.out.println(test);
-
     }
 
 }
