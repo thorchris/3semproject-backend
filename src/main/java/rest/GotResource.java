@@ -26,7 +26,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.SecurityContext;
 import utils.DataFetcher;
 import utils.EMF_Creator;
-import utils.GotFetcher;
+import fetchers.GotFetcher;
 
 
 @Path("got")

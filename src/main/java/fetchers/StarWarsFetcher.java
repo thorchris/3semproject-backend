@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package utils;
+package fetchers;
 
 import DTO.StarWarsDTO;
 import DTO.StarWarsListDTO;
@@ -14,6 +14,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.nimbusds.jose.shaded.json.parser.ParseException;
 import java.io.IOException;
+import utils.HttpUtils;
 
 /**
  *

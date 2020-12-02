@@ -20,7 +20,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.core.UriInfo;
 import utils.EMF_Creator;
-import utils.StarWarsFetcher;
+import fetchers.StarWarsFetcher;
 
 /**
  * 

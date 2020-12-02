@@ -11,7 +11,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriInfo;
-import utils.HarryPotterFethcer;
+import fetchers.HarryPotterFetcher;
 
 
 @Path("hp")
@@ -33,7 +33,7 @@ public class HpRessource {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("all")
     public String allChars() throws IOException, Exception {
-        String result = HarryPotterFethcer.hpFetch(es, GSON, "http://hp-api.herokuapp.com/api/characters");
+        String result = HarryPotterFetcher.hpFetch(es, GSON, "http://hp-api.herokuapp.com/api/characters");
         cachedResponse = result;
         return result;
     }  

@@ -18,6 +18,10 @@ public class StarWarsListDTO {
     public List<StarWarsDTO> getStarWarsDTOList() {
         return results;
     }
+    
+    public StarWarsListDTO(List<StarWarsDTO> results) {
+        this.results = results;
+    }
 
     public void setStarWarsDTOList(List<StarWarsDTO> results) {
         this.results = results;

@@ -5,6 +5,7 @@
  */
 package utils;
 
+import fetchers.StarWarsFetcher;
 import io.restassured.RestAssured;
 import static io.restassured.RestAssured.given;
 import io.restassured.parsing.Parser;

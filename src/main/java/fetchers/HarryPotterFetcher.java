@@ -1,4 +1,4 @@
-package utils;
+package fetchers;
 
 import DTO.HarryPotterListDTO;
 import DTO.HarryPotterDTO;
@@ -11,9 +11,10 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import utils.HttpUtils;
+import utils.HttpUtils;
 
 
-public class HarryPotterFethcer {
+public class HarryPotterFetcher {
     
       public static String hpFetch(ExecutorService threadPool, final Gson gson, String FACT_SERVER) throws Exception{
         
